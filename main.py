@@ -38,10 +38,22 @@ model.fit(X, y)
 # -------------------------
 st.sidebar.header("Enter Student Details")
 
-attendance = st.sidebar.slider("Attendance (%)", 0, 100, 75)
-marks = st.sidebar.slider("Internal Marks", 0, 100, 60)
-assignment = st.sidebar.slider("Assignment Score", 0, 100, 65)
-participation = st.sidebar.slider("Participation (1–10)", 1, 10, 5)
+attendance = st.sidebar.slider(
+    "Attendance (%)", 0, 100, 75,
+    help="Percentage of classes attended by the student"
+)
+marks = st.sidebar.slider(
+    "Internal Marks", 0, 100, 60,
+    help="Marks obtained in internal exams"
+)
+assignment = st.sidebar.slider(
+    "Assignment Score", 0, 100, 65,
+    help="Average score for assignments"
+)
+participation = st.sidebar.slider(
+    "Participation (1–10)", 1, 10, 5,
+    help="Class participation rating from 1 (low) to 10 (high)"
+)
 
 input_data = np.array([[attendance, marks, assignment, participation]])
 
@@ -77,21 +89,31 @@ st.write(f"Risk Probability: {risk_score:.2f}")
 st.progress(int(risk_score * 100))
 
 # -------------------------
-# RECOMMENDATIONS
+# RECOMMENDATIONS (COLOR-CODED)
 # -------------------------
 st.subheader("Recommendations")
 if risk == "High":
-    st.write("- Assign academic mentor")
-    st.write("- Extra remedial classes")
-    st.write("- Regular attendance monitoring")
-    st.write("- Counseling session")
+    st.markdown("<span style='color:red'>- Assign academic mentor</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:red'>- Extra remedial classes</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:red'>- Regular attendance monitoring</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:red'>- Counseling session</span>", unsafe_allow_html=True)
 elif risk == "Medium":
-    st.write("- Provide guidance sessions")
-    st.write("- Monitor performance regularly")
-    st.write("- Encourage participation in class activities")
+    st.markdown("<span style='color:orange'>- Provide guidance sessions</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:orange'>- Monitor performance regularly</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:orange'>- Encourage participation in class activities</span>", unsafe_allow_html=True)
 else:
-    st.write("- Continue regular monitoring")
-    st.write("- Encourage participation in class activities")
+    st.markdown("<span style='color:green'>- Continue regular monitoring</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:green'>- Encourage participation in class activities</span>", unsafe_allow_html=True)
+
+# -------------------------
+# BAR CHART OF INPUTS
+# -------------------------
+st.subheader("Student Performance Overview")
+perf_df = pd.DataFrame({
+    "Metric": ["Attendance", "Internal Marks", "Assignment Score", "Participation"],
+    "Value": [attendance, marks, assignment, participation]
+})
+st.bar_chart(perf_df.set_index("Metric"))
 
 # -------------------------
 # DISCLAIMER
