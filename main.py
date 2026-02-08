@@ -38,9 +38,20 @@ participation = st.sidebar.slider("Participation (1–10)", 1, 10, 5)
 
 input_data = np.array([[attendance, marks, assignment, participation]])
 
-prediction = model.predict(input_data)[0]
-risk = model.predict_proba(input_data)[0][1]
-
+# Clearer prediction output
+if risk == "High":
+    st.write("Prediction Result: High Dropout Risk — Early intervention recommended.")
+else:
+    st.write("Prediction Result: Low Dropout Risk — Student likely to continue successfully.")
+# Recommendations based on risk
+if risk == "High":
+    st.write("Recommendations:")
+    st.write("- Assign academic mentor")
+    st.write("- Extra remedial classes")
+    st.write("- Regular attendance monitoring")
+    st.write("- Counseling session")
+else:
+    st.write("Recommendations: Continue regular monitoring and encourage participation.")
 # -------------------------
 # Output
 # -------------------------
