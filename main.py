@@ -58,7 +58,9 @@ elif risk_score < 0.7:
 else:
     risk = "High"
 
-# Display prediction
+# -------------------------
+# DISPLAY PREDICTION
+# -------------------------
 st.subheader("Prediction Result")
 if risk == "High":
     st.error(f"⚠️ High Dropout Risk — Early intervention recommended (Risk Score: {risk_score:.2f})")
@@ -66,6 +68,13 @@ elif risk == "Medium":
     st.warning(f"⚠️ Medium Dropout Risk — Monitor closely (Risk Score: {risk_score:.2f})")
 else:
     st.success(f"✅ Low Dropout Risk — Student likely to continue successfully (Risk Score: {risk_score:.2f})")
+
+# -------------------------
+# DISPLAY PROGRESS BAR
+# -------------------------
+st.subheader("Dropout Risk Score")
+st.write(f"Risk Probability: {risk_score:.2f}")
+st.progress(int(risk_score * 100))
 
 # -------------------------
 # RECOMMENDATIONS
