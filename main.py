@@ -89,4 +89,3 @@ else:
 # -------------------------
 st.markdown("---")
 st.caption("Disclaimer: This is an early-warning prototype. Predictions depend on input data and do not cover personal or financial factors.")
-st.caption("Hackathon Demo | ML-based Early Warning System")
